@@ -1,0 +1,22 @@
+#1. Import the Titanic Dataset from the link Titanic Data Set.
+#Import the dataset with the following command:
+# Save the excel file in working directory & then use the command below
+
+data1 <- read_excel(file.choose())
+
+# a. Preprocess the passenger names to come up with a list of titles that represent families
+and represent using appropriate visualization graph.
+
+data1$Surname <- sapply(data1$name,function(x)(strsplit(x,'[,]'))[[1]][1])
+
+# b. b. Represent the proportion of people survived from the family size using a graph.
+
+data1$Fsize <- data1$sibsp + data1$parch +1
+
+ggplot(data1[1:891,],aes(x= Fsize, fill= factor(survived)))+
+  geom_bar(stat = 'count',position = 'dodge')+
+  scale_x_continuous(breaks=c(1:11))+
+  labs(x= 'Family Size')+
+  theme_bw()
+  
+  #c.
